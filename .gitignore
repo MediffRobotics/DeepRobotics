@@ -1,4 +1,5 @@
 *venv
+*.pyc
 .idea
 *.sqlite3
 tf_images
