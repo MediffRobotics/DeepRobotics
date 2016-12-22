@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello Word.")
+    return render(request, 'robweb/index.html')
