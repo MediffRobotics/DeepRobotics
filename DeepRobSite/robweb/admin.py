@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import TfImages
+from .models import TfImage
 
-admin.site.register(TfImages)
+admin.site.register(TfImage)
