@@ -1,0 +1,30 @@
+{% extends 'robweb/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Gallery
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Gallery</h1>
+          {% if imgs %}
+            <ul>
+            {% for img in imgs %}
+                <li>
+                    <img src="../media/{{img.img }}"/>
+                    <small>{{img.upload_date}}, {{img.result}}</small>
+                </li>
+            {% endfor %}
+            </ul>
+            {% else %}
+            <p>No images are available.</p>
+            {% endif %}
+      </div>
+
+    </div>
+
+{% endblock %}
