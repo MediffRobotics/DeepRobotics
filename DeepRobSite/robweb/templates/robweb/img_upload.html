@@ -1,0 +1,30 @@
+{% extends 'robweb/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Upload Image
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="container">
+        <div class="starter-template">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                Image Upload
+            </div>
+            <div class="panel-body">
+                <form role="form" id="img_form" method="post" action="{% url 'robweb:img_upload' %}"
+                enctype="multipart/form-data">
+                    <fieldset>
+                        {% csrf_token %}
+                        {{ img_form.img }}
+                        <input type="submit" name="submit" value="Upload" class="btn  btn-default "/>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}
