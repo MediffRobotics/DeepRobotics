@@ -1,0 +1,20 @@
+{% extends 'robweb/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Upload Image
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>{{img.name}}</h1>
+        <p class="lead">{{img.result}}<br>
+            </p>
+      </div>
+
+    </div>
+
+{% endblock %}

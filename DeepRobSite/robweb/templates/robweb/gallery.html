@@ -32,7 +32,7 @@
                     <img class="img-responsive" src="../media/{{img.img }}" alt="">
                 </a>
                 <h3>
-                    <a href="../media/{{img.img }}">{{img.img}}</a>
+                    <a href="{% url 'robweb:detail' img.name %}">{{img.img}}</a>
                 </h3>
                 <p>{{img.upload_date}}, {{img.result}}</p>
             </div>

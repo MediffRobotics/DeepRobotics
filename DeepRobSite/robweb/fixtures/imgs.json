@@ -3,6 +3,7 @@
     "model": "robweb.tfimage",
     "pk": 1,
     "fields": {
+        "name": "plastic_bowl_melamine_rice_bowls_logo_printed.jpg",
         "img": "tf_images/plastic_bowl_melamine_rice_bowls_logo_printed.jpg",
         "result": "",
         "upload_date": "2016-12-22T23:34:25.782Z"
@@ -12,6 +13,7 @@
     "model": "robweb.tfimage",
     "pk": 2,
     "fields": {
+        "name": "123.png",
         "img": "tf_images/123.png",
         "result": "",
         "upload_date": "2016-12-23T00:01:52.980Z"
@@ -21,6 +23,7 @@
     "model": "robweb.tfimage",
     "pk": 3,
     "fields": {
+        "name": "avatar.jpeg",
         "img": "tf_images/avatar.jpeg",
         "result": "",
         "upload_date": "2016-12-23T00:28:37.420Z"
@@ -30,6 +33,7 @@
     "model": "robweb.tfimage",
     "pk": 4,
     "fields": {
+        "name": "HelloWorld.svg_.png",
         "img": "tf_images/HelloWorld.svg_.png",
         "result": "",
         "upload_date": "2016-12-23T00:29:39.315Z"
@@ -39,54 +43,10 @@
     "model": "robweb.tfimage",
     "pk": 5,
     "fields": {
+        "name": "images.jpeg",
         "img": "tf_images/images.jpeg",
         "result": "",
         "upload_date": "2016-12-23T00:31:24.713Z"
-    }
-},
-{
-    "model": "robweb.tfimage",
-    "pk": 6,
-    "fields": {
-        "img": "tf_images/download_1.jpeg",
-        "result": "",
-        "upload_date": "2016-12-23T00:31:36.305Z"
-    }
-},
-{
-    "model": "robweb.tfimage",
-    "pk": 7,
-    "fields": {
-        "img": "tf_images/download.jpeg",
-        "result": "",
-        "upload_date": "2016-12-23T00:31:50.409Z"
-    }
-},
-{
-    "model": "robweb.tfimage",
-    "pk": 8,
-    "fields": {
-        "img": "tf_images/coolbear-boxing-wide575x346.jpg",
-        "result": "",
-        "upload_date": "2016-12-23T00:32:03.731Z"
-    }
-},
-{
-    "model": "robweb.tfimage",
-    "pk": 9,
-    "fields": {
-        "img": "tf_images/amex.jpg",
-        "result": "",
-        "upload_date": "2016-12-23T00:32:17.046Z"
-    }
-},
-{
-    "model": "robweb.tfimage",
-    "pk": 10,
-    "fields": {
-        "img": "tf_images/hqdefault.jpg",
-        "result": "",
-        "upload_date": "2016-12-23T00:32:51.392Z"
     }
 }
 ]

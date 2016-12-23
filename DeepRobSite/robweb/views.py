@@ -1,14 +1,22 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from .forms import ImageForm
 from .models import TfImage
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_exempt
+from django.core.files.images import ImageFile
 
 
 def index(request):
     return render(request, 'robweb/index.html')
+
+
+def detail(request, img_name):
+    tf_image = get_object_or_404(TfImage, name=img_name)
+    context = {
+        'img': tf_image
+    }
+    return render(request, 'robweb/detail.html', context)
 
 
 @csrf_exempt
@@ -18,6 +26,7 @@ def img_upload(request):
         if img_form.is_valid():
             if 'img' in request.FILES:
                 TfImage.objects.create(
+                    name=request.FILES['img'].name,
                     img=request.FILES['img'],
                     upload_date=timezone.datetime.now()
                 )
