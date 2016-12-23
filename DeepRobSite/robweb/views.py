@@ -34,7 +34,7 @@ def img_upload(request):
 
 def gallery(request):
     imgs = TfImage.objects.order_by('-upload_date')
-    paginator = Paginator(imgs, 10)  # Show 10 words per page
+    paginator = Paginator(imgs, 9)  # Show 9 words per page
 
     page = request.GET.get('page')
     try:

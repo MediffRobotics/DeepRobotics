@@ -26,6 +26,7 @@
         <!-- Projects Row -->
         <div class="row">
             {% for img in imgs %}
+            {% if forloop.counter  < 4 %}
             <div class="col-md-4 portfolio-item">
                 <a href="#">
                     <img class="img-responsive" src="../media/{{img.img }}" alt="">
@@ -35,6 +36,41 @@
                 </h3>
                 <p>{{img.upload_date}}, {{img.result}}</p>
             </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Row 2 -->
+        <div class="row">
+            {% for img in imgs %}
+            {% if forloop.counter  > 3 and forloop.counter < 7 %}
+            <div class="col-md-4 portfolio-item">
+                <a href="#">
+                    <img class="img-responsive" src="../media/{{img.img }}" alt="">
+                </a>
+                <h3>
+                    <a href="../media/{{img.img }}">{{img.img}}</a>
+                </h3>
+                <p>{{img.upload_date}}, {{img.result}}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Row 3 -->
+        <div class="row">
+            {% for img in imgs %}
+            {% if forloop.counter  > 6%}
+            <div class="col-md-4 portfolio-item">
+                <a href="#">
+                    <img class="img-responsive" src="../media/{{img.img }}" alt="">
+                </a>
+                <h3>
+                    <a href="../media/{{img.img }}">{{img.img}}</a>
+                </h3>
+                <p>{{img.upload_date}}, {{img.result}}</p>
+            </div>
+            {% endif %}
             {% endfor %}
         </div>
         <!-- /.row -->
