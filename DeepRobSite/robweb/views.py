@@ -4,12 +4,14 @@ from .forms import ImageForm
 from .models import TfImage
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
     return render(request, 'robweb/index.html')
 
 
+@csrf_exempt
 def img_upload(request):
     if request.method == 'POST':
         img_form = ImageForm(request.POST, request.FILES)
