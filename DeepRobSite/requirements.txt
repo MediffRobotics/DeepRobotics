@@ -2,3 +2,4 @@ Django==1.10.4
 Pillow==3.4.2
 poster==0.8.1
 psycopg2==2.6.2
+requests==2.12.4
