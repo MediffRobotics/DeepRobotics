@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
 from .forms import ImageForm
 from .models import TfImage
 from django.utils import timezone
@@ -17,6 +18,15 @@ def detail(request, img_name):
         'img': tf_image
     }
     return render(request, 'robweb/detail.html', context)
+
+
+def result(request, img_name):
+    tf_image = get_object_or_404(TfImage, name=img_name)
+    response = {
+        'img_name': img_name,
+        'result': tf_image.result
+    }
+    return JsonResponse(response)
 
 
 @csrf_exempt
