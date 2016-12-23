@@ -1,0 +1,123 @@
+List of the functionality of the toolbox. 
+Created by Ryan James Steindl (to check compatiblity with v9 of the toolbox).
+
+Legend
+i = implemented 
+- = subfunction 
+x = being worked on 
+n = not implemented  
+? = To be tested (see notes for known problems) 
+
+Quaternion: 
+
+  tr2q		i 
+  + 		i
+  -		i
+  *		i	
+  /		i	
+  **		i	 	
+  inv		i
+  norm		i	
+  double	i
+  unit		i
+  T		i
+  R 		i
+  interp	?	Problem with arccos in this function when input is >1 
+
+
+Link:
+  display	i
+  firction 	i
+  nofriction	i
+  islimit	i
+  tr		i
+
+
+SerialLink: 
+  Accel		i
+  cinertia	i 
+  coriolis	i
+  fdyn		i
+  fkine		i
+  gravload	i
+  ikine6s	? 	ikine560?
+  ikine		i
+  inertia	i
+  itorque	i
+  jacob0	i
+  jacobn	i
+  maniplty	i
+  mtimes	i
+  nofriction	i
+  rne		i
+  rne_dh	-
+  rne_mdh	-
+  SerialLink	i
+  showlink	i
+
+  dyn		?	No code in the file 
+  islimit	n
+  isspherical	n
+  jacob_dot	n
+  payload	n
+  perturb	n
+  plot		n
+  teach 	n
+  
+
+robot: 
+  diff2tr	i
+  ftrans	i
+  tlspb		i
+  jtraj		i
+  ctraj		i
+  rotx		i
+  roty		i
+  rotz		i
+  trotx		i
+  troty		i
+  trotz		i
+  tr2eul	i
+  eul2r		i
+  eul2tr	i
+  tr2rpy	i 	updated to v9 convention 
+  rpy2r		i 	updated to v9 convention
+  rpy2tr	i 	updated to v9 convention
+  oa2r		i
+  rotvec2r	i
+  rotvec2tr	i
+  transl	i
+  skew		i
+  tr2diff	i
+  trinterp	i
+  trnorm	i
+  t2r		i
+  r2t		i
+  trplot	i
+  ishomog	i
+  isrot		i
+  isvec		i
+  numcols	i
+  numrows	i
+  unit		i
+  crossp	i
+  arg2array	i
+
+  plotbotopt	?	no idea what this is atm 
+
+
+Robots:
+  drivebot	?	needs testing 
+  puma560	i
+  puma560akb	i
+  stanford	?	needs testing 
+  twolink	? 	loads fine problem when calling the robot 
+
+
+
+
+
+
+
+
+

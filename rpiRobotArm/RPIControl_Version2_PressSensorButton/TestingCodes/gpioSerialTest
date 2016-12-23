@@ -1,0 +1,33 @@
+import RPi.GPIO as GPIO
+import time
+import serial
+
+# Serial commu
+port=serial.Serial("/dev/ttyACM0",baudrate=9600,timeout=3)
+time.sleep(3)
+
+port.write("-50000h")
+	
+
+
+# input ourt put
+ButtonPIN=29
+
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(ButtonPIN, GPIO.OUT)
+
+
+
+
+while 1:
+	if GPIO.input(ButtonPIN)==GPIO.LOW:
+
+		print "low"
+		
+	if GPIO.input(ButtonPIN)==GPIO.HIGH:
+		print "HIGH"	
+		
+	time.sleep(0.2)
+		
+		

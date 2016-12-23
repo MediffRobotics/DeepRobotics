@@ -1,0 +1,3 @@
+ip add: ifconfig
+wlan: inet addr:192.168.1.102  Bcast:192.168.1.255  Mask:255.255.255.0
+etcho: inet addr:192.168.1.102  Bcast:192.168.1.255  Mask:255.255.255.0

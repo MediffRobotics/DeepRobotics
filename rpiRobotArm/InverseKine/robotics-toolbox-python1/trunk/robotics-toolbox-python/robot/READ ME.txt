@@ -1,0 +1,14 @@
+Instalation:
+This vesion on the toolbox only was developed with python 2.7.2
+
+Install the latest version of numpy from http://sourceforge.net/projects/numpy/files/
+
+Install the latest version of matplotlib from http://sourceforge.net/projects/matplotlib/files/matplotlib/matplotlib-1.1.0/
+
+Install the latest version of ipython from http://ipython.org/download.html
+
+Copy the robot directory into \Python27\Lib\site-packages 
+
+to use the toobox in Ipython type: from robot import * (this will have to be called every time you start Ipython or idle.)
+
+you are ready to use the tool  

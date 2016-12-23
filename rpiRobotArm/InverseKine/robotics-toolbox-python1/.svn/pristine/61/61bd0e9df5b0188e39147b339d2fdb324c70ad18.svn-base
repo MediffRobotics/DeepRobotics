@@ -1,0 +1,50 @@
+= Introduction =
+
+The first version of the Python toolbox is out!  
+
+The Python version shares much of the syntax of the Matlab version.  Linear algebra is handled using the [http://www.scipy.org/Documentation NumPy] library.  The NumPy matrix type is the default used, but most functions have been written to vector argument to be given as an array, matrix or a simple native list.  Python named arguments are used in preference to variable length unnamed argument lists.
+
+The convention of the previous toolbox where arguments can be given separately or as a single matrix:
+{{{
+rne(robot, q, qd, qdd)
+rne(robot, [q qd qdd])
+}}}
+is generally retained.
+
+== Implementation ==
+
+The code is aggregated into a few .py files along functional lines, ie. transform.py, quaternion.py.  All methods are brought into the global name space using 
+
+{{{
+from robot import *
+}}}
+
+which also imports NumPy.
+
+All functions are documented with Python docstrings using the [http://epydoc.sourceforge.net epydoc] tool which gives similar features to Javadoc
+and doxygen.
+
+== Usage ==
+
+{{{
+>>> from robot import *
+>>> quaternion( rotx(0.1) )
+0.998750 <0.049979, 0.000000, 0.000000>
+>>> roty(0.2)
+matrix([[ 0.98006658,  0.        ,  0.19866933],
+        [ 0.        ,  1.        ,  0.        ],
+        [-0.19866933,  0.        ,  0.98006658]])
+>>> 
+}}}
+
+== Getting the toolbox ==
+
+The code and the HTML documentation are available as separate zip files from the 
+[http://code.google.com/p/robotics-toolbox-python/downloads/list Download] tab.
+
+You can browse the source via the Source tab.
+
+== Other versions of the toolbox ==
+
+  * The original [http://www.petercorke.com/Robotics%20Toolbox.html Matlab version]
+  * A recent [http://rtss.sourceforge.net/docs/index.html Scilab version]
