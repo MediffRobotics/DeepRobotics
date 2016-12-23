@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import JsonResponse
 from .forms import ImageForm
 from .models import TfImage
@@ -21,7 +21,7 @@ def detail(request, img_name):
 
 
 def result(request, img_name):
-    tf_image = get_object_or_404(TfImage, name=img_name)
+    tf_image = get_list_or_404(TfImage, name=img_name)[0]
     response = {
         'img_name': img_name,
         'result': tf_image.result
