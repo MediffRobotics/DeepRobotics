@@ -3,4 +3,4 @@
 .idea
 *.sqlite3
 tf_images
-DS_Store
+.DS_Store

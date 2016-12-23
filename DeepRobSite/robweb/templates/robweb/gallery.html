@@ -7,24 +7,80 @@
 
 {% block body_block %}
 
+
+<!-- Page Content -->
     <div class="container">
 
-      <div class="starter-template">
-        <h1>Gallery</h1>
-          {% if imgs %}
-            <ul>
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Gallery
+                    <small>Source Images</small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        {% if imgs %}
+
+        <!-- Projects Row -->
+        <div class="row">
             {% for img in imgs %}
-                <li>
-                    <img src="../media/{{img.img }}"/>
-                    <small>{{img.upload_date}}, {{img.result}}</small>
-                </li>
+            <div class="col-md-4 portfolio-item">
+                <a href="#">
+                    <img class="img-responsive" src="../media/{{img.img }}" alt="">
+                </a>
+                <h3>
+                    <a href="#">{{img.img}}</a>
+                </h3>
+                <p>{{img.upload_date}}, {{img.result}}</p>
+            </div>
             {% endfor %}
-            </ul>
-            {% else %}
-            <p>No images are available.</p>
+        </div>
+        <!-- /.row -->
+
+
+        <hr>
+
+        <!-- Pagination -->
+        {% if imgs.paginator.num_pages > 1 %}
+        <hr/>
+        <ul class="pagination">
+            {% if imgs.number > 1 %}
+            <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                <a href="?page=1">1 <<</a>
+            </li>
             {% endif %}
-      </div>
+            {% if imgs.has_previous %}
+            <li class="paginate_button previous" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
+                <a href="?page={{ imgs.previous_page_number }}"><</a>
+            </li>
+            {% endif %}
+            <li class="paginate_button active" aria-controls="dataTables-example" tabindex="0">
+                <a href="#">{{imgs.number}}</a>
+            </li>
+            {% if imgs.has_next %}
+            <li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
+                <a href="?page={{ imgs.next_page_number }}"> ></a>
+            </li>
+            {% endif %}
+            {% if imgs.number < imgs.paginator.num_pages %}
+            <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                <a href="?page={{ imgs.paginator.num_pages }}">>> {{ imgs.paginator.num_pages }}</a>
+            </li>
+            {% endif %}
+        </ul>
+        {% endif %}
+        <!-- /.row -->
+        
+        
+        {% else %}
+        <p>No images are available.</p>
+        {% endif %}
+
 
     </div>
+    <!-- /.container -->
+
 
 {% endblock %}
