@@ -24,10 +24,10 @@ from tflearn.datasets import imdb
 
 # IMDB Dataset loading
 train, test, _ = imdb.load_data(path='imdb.pkl', n_words=10000,
-                                valid_portion=0.1)
+                                valid_portion=0.99)
 trainX, trainY = train
-testX, testY = test
-
+#testX, testY = test
+testX, testY = train
 # Data preprocessing
 # Sequence padding
 trainX = pad_sequences(trainX, maxlen=100, value=0.)
@@ -46,5 +46,5 @@ net = tflearn.regression(net, optimizer='adam', learning_rate=0.001,
 
 # Training
 model = tflearn.DNN(net, tensorboard_verbose=0)
-model.fit(trainX, trainY, validation_set=(testX, testY), show_metric=True,
+model.fit(trainX, trainY, n_epoch=1,validation_set=(testX, testY), show_metric=True,
           batch_size=32)
