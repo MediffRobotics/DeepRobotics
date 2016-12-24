@@ -1,0 +1,8 @@
+setup.py
+tensorflow.egg-info/PKG-INFO
+tensorflow.egg-info/SOURCES.txt
+tensorflow.egg-info/dependency_links.txt
+tensorflow.egg-info/entry_points.txt
+tensorflow.egg-info/not-zip-safe
+tensorflow.egg-info/requires.txt
+tensorflow.egg-info/top_level.txt
