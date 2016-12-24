@@ -1,0 +1,147 @@
+*********************************************************
+Project Title                                                           
+*********************************************************
+Using Arduino to control a Robotic Arm
+
+*********************************************************
+Team Members              
+*********************************************************
+Yifan Hua
+Monica Neli de Resende
+Zhiqiang Tang
+
+*********************************************************
+Description                                                         
+*********************************************************
+The project has the objective of using the Arduino to control a robotic arm. The user can interact with the program typing the number correspondent to one of the four options of the menu through the serial monitor: create a new command, execute an existing command, use the robot in a free mode and delete and create a new file to store the movements.
+
+In the first option, the user will type a keyword though the serial monitor to define a new command and use two joysticks to teach the robotic arm the sequence of movement for that command. Then the  command will be saved into the SD card and return to the menu of options.
+
+In the second option, the user can search for an existing command and set an alarm to start executing it. Then, the robotic arm will repeatedly execute the command previously defined and saved into the SD card.
+
+In the third option, the user can use the joystick to move the robotic arm without recording and saving anything. After that, the user can answer the prompt to go back to the menu by typing ‘y’.
+
+In the fourth option, the user is able to delete the current file with the movements stored so far and create a empty file.
+
+*********************************************************
+Elements used                                                       
+*********************************************************
+Two Arduino boards
+One display
+Two joysticks
+Five leds
+One potentiometer
+One SD card
+Two speakers
+Robot arm
+One computer is enough to test the project
+
+*********************************************************
+Main Description of the Wiring part                                                   
+*********************************************************
+Board 1(robot controller board):
+The joysticks should be wired to the pins number: 
+Left Joystick Vertical direction-> analog pin 0
+Left Joystick Horizontal direction-> analog pin 1
+Right Joystick Vertical direction-> analog pin 2
+Right Joystick Horizontal  direction-> analog pin 3
+The LEDs use the pins:
+    LED_0 -> digital pin 2
+LED_1 -> digital pin 3
+LED_2 -> digital pin 4
+LED_3 -> digital pin 5
+LED_4 -> digital pin 6
+The potentiometer uses the analog pin 2
+The ‘OK’ button: Once we push this button, we finish recording the movemts.
+        This button on the right joystick  and is connected to digital pin 7
+The robot uses four servos:   Servo A ->digital pin 8
+                    Servo B ->digital pin 9
+Servo C ->digital pin 10
+Servo D ->digital pin 11
+
+
+Board 2(Commander board):
+The display should be wired as the lecture notes.
+The speaker should be wired and connected to the digital pin 12. 
+
+*********************************************************
+Implementation                                                        
+*********************************************************
+Robot movement
+    The hardware:
+Two joysticks is used to move the four joints of the robot arm. As a result, each joystick will define the angle that the joint related to that joystick need to be moved. The movements data is being stored into a struct with the movement name and four arrays of 16 unsigned int (size of 300) one for each robotic arm joint. In addition, a potentiometer will be used to control the speed of the tasks and the LEDs are used for showing the current speed level.
+
+    The code:
+        Our code is separated by 5 different files.  
+The code in writing.cpp,writing.h,communication.cpp, and communication.h are to do the communication between two boards. The parrot.cpp is the main file, it contains all the code to control the robotic arm.  
+The parrot.cpp has 5 parts:     Controlling Servos,Using Joysticks,Controlling Speed of Robot,Moving robot automatically, and Recording Movements.
+
+    
+
+Saving into the SD card
+The movements will be saved in a text file into the SD card. The first line of the file has the letter ‘m’, indicating a new movement, followed by the name of the movement. Then, for each joint, in a new line, there is a line starting with ‘jointN’, where ‘N’ is the number of the joint from 1 up to 4 followed by all the angles separated by space. In addition, there is an empty line between each movement.
+The main functions used were createFile, saveMovements and  getMovement. The first function checks if the file already exists, remove it and create it again. The function saveMovements is done to save multiple movements using a helper function called writeBuffer. The function getMovement retrieve a movement specified by the user using the helper functions readLine, getKeyword, readMoviment, readAngleLine and readEmptyLine. The function getMovement uses the name read from the file to decide if it is the movement searched by the user or not. Although the movement was not the one searched by the user, the function reads all the angles. The difference is that in this case the angles is not stored into the struct. As a result, the function reads all the lines of the file until find the searched movement or find the end of the file.
+
+
+Alarm and timer
+The program has a timer, which means that we have an alarm and when time is up, an order to the robot arm start running it will be sent. 
+The timer was done by...
+
+Information on the display
+The display shows the time and the countdown of the alarm set by the user. In addition, the display will be used to show the name of the movement that is being executed.
+The time is updated every second… However, some delay can occur due the complexity of some functions.
+
+The countdown is shown on the display using...
+
+The function showMovementInfo from lcdinfo.cpp is used to print the name of the on going movement on the display. The global variable nextLine controls the position that the name should be written. When the variable nextLine reach the limit of the display, the correspondent space on the display is cleaned up and the variable nextLine is reseted to start on the first line again.
+
+Communication and Protocol
+Due the number of elements used, it was necessary to use two arduino boards to fulfil the objectives of the project. Then we needed to implement functions to make the communication between these two boards. It was used the Serial3 port to transmit the data and set a protocol to synchronize it. This protocol was implemented using capitalized letters before sending the data and changing the mode of operation, i.e. create command mode, executing command mode and free mode. The commander board, which code implements the menu, is responsible to send a signal to warn the robot controller board about the options chosen. The main function used to implement the menu of option is called execute, which receives the number of the chosen option, validates it and calls the function correspondent to the option chosen by the user.
+
+Regarding the first option of the menu, the commander board sends an ‘R’ to the robot controller board which means an order of “start recording movements”. Then the robot controller board can start reading the input from the joysticks and storing the values into the struct, i.e. the angles. The commander board keeps waiting for an ‘R’ signal indicating that the robot controller board will send all the data to be saved into the SD card.
+
+In the second option of the menu, an ‘L’ is sent to the robot controller board letting it know that the data is going to be sent. As a result, the robot controller board can be ready to receive data that will be used to make the robot move automatically. After the data be sent, the robot controller board waits for the signal of the timer, i.e. only when the alarm is set and the time is up that the command will be executed. The robot controller board knows about the right time to execute the command after receive an ‘E’ from the commander board.
+
+In the third option an ‘F’ is sent from the commander board to the robot controller board to warn about the free mode usage, which is kept until an ‘S’ is sent from the commander board to the robot controller board meaning the end of the free usage. The signal to end the free mode usage is targeted when the user types ‘y’ to the prompt to go back to main menu.
+
+
+Search Machine
+    The search machine has the objective of offer to the user options of….
+
+
+*********************************************************
+Division of work                                              
+*********************************************************
+Yifan Hua has done the timer module, alarm module, wiring of the speaker part and search machine module.
+
+Monica Neli de Resende has done the writing into the SD card module and part of the communication module.
+
+Zhiqiang Tang has done the wiring part in the robot controller board, implemented the robot movement module and part of the communication module.
+
+All members has met frequently to work together and do the tests of any module.
+
+*********************************************************
+Suggested Improvements                                            
+*********************************************************
+The reading of the file could be done using seek function and storing the number of bytes of the line at the beginning of each line in the file to make easier to compute the value of the “jump”.(suggested by the professor)
+The storage into the SD card could be more efficient and easier using binary files.
+It was noticed that a good management of the versions of the code produced is a good practice to find and solve bugs, skill which we need to improve.
+We also could think in a better way to share our code, not basically using a USB drive.
+[...]
+
+
+*********************************************************
+References                                           
+*********************************************************
+[1] Arduino SD Library. Information available on http://arduino.cc/en/Reference/SD. Accessed on December 04, 2013.
+
+[2] Arduino SD files. Example code available on http://arduino.cc/en/Tutorial/Files. Accessed on December 04, 2013.
+
+[3] CMPUT 274 Lecture Notes and example codes to set the SD card, set the display, read and write from/to the Serial3. Material available on eclass.
+
+[4] CMPUT 274 submitted solution(ours) of the weekly exercise 7 to read and validate the the option chosen by the user.
+
+[4] CMPUT 274 Concepts learned with the first assignment about the communication between two arduino boards through the Serial3 port. 
+
+[5] 
+
