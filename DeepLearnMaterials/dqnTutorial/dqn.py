@@ -115,7 +115,7 @@ class DQN():
 
 		# save network every 1000 iteration
 		if self.time_step % 1000 == 0:
-			self.saver.save(self.session, 'saved_networks/' + 'network' + '-dqn', global_step = self.time_step)
+			self.saver.save(self.session, './trainData', global_step = self.time_step)
 
 	def egreedy_action(self,state):
 		Q_value = self.Q_value.eval(feed_dict = {
@@ -185,6 +185,7 @@ def main():
 
 	# save results for uploading
 	env.monitor.start('gym_results/CartPole-v0-experiment-1',force = True)
+	#env.monitor.start('./',force = True)
 	for i in xrange(100):
 		state = env.reset()
 		for j in xrange(200):
