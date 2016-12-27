@@ -13,7 +13,7 @@ def index(request):
 
 
 def detail(request, img_name):
-    tf_image = get_object_or_404(TfImage, name=img_name)
+    tf_image = get_object_or_404(TfImage, name=img_name)[0]
     context = {
         'img': tf_image
     }
