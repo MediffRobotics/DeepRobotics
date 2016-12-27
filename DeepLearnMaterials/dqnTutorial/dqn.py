@@ -118,9 +118,7 @@ class DQN():
 			self.saver.save(self.session, './trainData', global_step = self.time_step)
 
 	def egreedy_action(self,state):
-		Q_value = self.Q_value.eval(feed_dict = {
-			self.state_input:[state]
-			})[0]
+		Q_value = self.Q_value.eval(feed_dict = {self.state_input:[state]})[0]
 		if random.random() <= self.epsilon:
 			return random.randint(0,self.action_dim - 1)
 		else:
@@ -162,6 +160,7 @@ def main():
 			next_state,reward,done,_ = env.step(action)
 			# Define reward for agent
 			reward_agent = -1 if done else 0.1
+
 			agent.perceive(state,action,reward,next_state,done)
 			state = next_state
 			if done:
