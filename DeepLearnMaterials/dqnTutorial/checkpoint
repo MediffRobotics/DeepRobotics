@@ -1,6 +1,2 @@
-model_checkpoint_path: "trainData-64000"
-all_model_checkpoint_paths: "trainData-60000"
-all_model_checkpoint_paths: "trainData-61000"
-all_model_checkpoint_paths: "trainData-62000"
-all_model_checkpoint_paths: "trainData-63000"
-all_model_checkpoint_paths: "trainData-64000"
+model_checkpoint_path: "trainData-1000"
+all_model_checkpoint_paths: "trainData-1000"
