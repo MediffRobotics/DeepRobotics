@@ -9,3 +9,5 @@ with open(img, 'r') as f:
     datagen, headers = multipart_encode({"img": f})
     request = urllib2.Request("http://cmput466.top/img_upload", datagen, headers)
     response = urllib2.urlopen(request)
+
+print("upload complete")
