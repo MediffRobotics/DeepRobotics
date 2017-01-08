@@ -10,7 +10,8 @@ import SocketServer
 from SocketServer import StreamRequestHandler  
 from time import ctime  
   
-host = '169.254.138.189'#'172.16.0.155'#'166.111.198.234'#'166.111.198.85' 
+host = '192.168.0.16'#'172.16.0.155'#'166.111.198.234'#'166.111.198.85' 
+#host = 'local'#'172.16.0.155'#'166.111.198.234'#'166.111.198.85' 
 port = 30005
 addr = (host,port)  
 BUF_SIZE = 1024  

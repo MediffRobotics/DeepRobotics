@@ -28,7 +28,7 @@ class RpiRobotArmButtons(threading.Thread):
                           
             threading.Thread.__init__(self)
             
-            print "done for buttons "
+            print "done for Init buttons "
         def run(self):
             
             while 1:
@@ -41,7 +41,7 @@ class RpiRobotArmButtons(threading.Thread):
             in_value= GPIO.input(self.TeachingButton)
             time.sleep(0.2)
             if in_value ==False:
-               #print "Pressed teaching"
+               print "Pressed teaching"
                self.FlagPress_TeachingButton=1
                
                while in_value == False:
@@ -55,7 +55,7 @@ class RpiRobotArmButtons(threading.Thread):
             time.sleep(0.2)
             if in_value ==False:
                
-               #print "Pressed Insert new Movement"     
+               print "Pressed Insert new Movement"     
                self.FlagPress_InsertMovementButton=1
                while in_value == False:
                   in_value = GPIO.input(self.InsertMovementButton)
@@ -67,7 +67,7 @@ class RpiRobotArmButtons(threading.Thread):
             in_value= GPIO.input(self.PlayResetButton)
             time.sleep(0.2)
             if in_value ==False:
-               #print "Pressed Play/ResetButton"
+               print "Pressed Play/ResetButton"
                self.FlagPress_PlayResetButton=1
                
                while in_value == False:
