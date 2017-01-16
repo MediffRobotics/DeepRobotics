@@ -10,8 +10,8 @@ import SocketServer
 from SocketServer import StreamRequestHandler  
 from time import ctime  
   
-host = '169.254.138.189'#'172.16.0.155'#'166.111.198.234'#'166.111.198.85' 
-port = 30005
+host = '192.168.0.16'#'172.16.0.155'#'166.111.198.234'#'166.111.198.85' 
+port = 3000
 addr = (host,port)  
 BUF_SIZE = 1024  
 #SerialSendToArduino=SerialGpioControllArduinos.rpiControllArduinos()
@@ -25,7 +25,7 @@ class Servers(StreamRequestHandler):
         self.wfile.write('connection %s:%s at %s succeed!' % (host,port,ctime()))
         
         while True:  
-            try:  
+            try:                  
                 data = self.request.recv(1024)    
                 if not data:                         
                     break  
@@ -43,6 +43,7 @@ class Servers(StreamRequestHandler):
         print "----\n%s\n[Recv]%s"%(str(self.client_address), data)
         
         if data.find(';')==-1 and data.find(',')==-1: #In teaching mode
+            print "----\n%s\n[Start to move]%s"%(str(self.client_address), data)
             self.SerialSendToArduino.MoveSteps(data)
             return 0
             

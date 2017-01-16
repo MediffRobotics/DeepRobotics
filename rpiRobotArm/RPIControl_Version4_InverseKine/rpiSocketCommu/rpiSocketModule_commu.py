@@ -1,54 +1,50 @@
 import time
 import sys
 import pandas as pd
-import SocketServer
-import threading
-import socket
+sys.path.append("../rpiControllsArduinos/")
+sys.path.append("../rpiSocketCommu/")
+import SerialGpioControllArduinos 
+import rpiSocketCommu_server
 
-    
+import SocketServer    
 from SocketServer import StreamRequestHandler  
 from time import ctime  
   
-host = '169.254.138.189'
-port = 30005
-portClient=30004
+host = '192.168.0.16'#'172.16.0.155'#'166.111.198.234'#'166.111.198.85' 
+port = 3000
 addr = (host,port)  
 BUF_SIZE = 1024  
-
-GloReceived=''
-
-
+#SerialSendToArduino=SerialGpioControllArduinos.rpiControllArduinos()
+#SerialSendToArduino=SerialGpioControllArduinos.rpiControllArduinos()
 class Servers(StreamRequestHandler):
     df=pd.DataFrame()
+    SerialSendToArduino=SerialGpioControllArduinos.rpiControllArduinos()
     
-    def handle(self): 
-        global GloReceived; 
+    def handle(self):  
         print 'connection from %s'%str(self.client_address)  
         self.wfile.write('connection %s:%s at %s succeed!' % (host,port,ctime()))
         
         while True:  
-            try:  
+            try:                  
                 data = self.request.recv(1024)    
                 if not data:                         
                     break  
-                 
-                print "received data" 
-                print data
-                GloReceived=data;      
-                #self.ProcessingReceived(data)
-                                        
+                      
+                self.ProcessingReceived(data)
+      
+                  
             except:  
                 print "except data"  
         print "disconnect %s"%str(self.client_address)            
         
-   
+        
     def ProcessingReceived(self,data):
         #Print out data
         print "----\n%s\n[Recv]%s"%(str(self.client_address), data)
         
         if data.find(';')==-1 and data.find(',')==-1: #In teaching mode
-            #self.SerialSendToArduino.MoveSteps(data)
-            print data
+            print "----\n%s\n[Start to move]%s"%(str(self.client_address), data)
+            self.SerialSendToArduino.MoveSteps(data)
             return 0
             
             
@@ -69,7 +65,6 @@ class Servers(StreamRequestHandler):
                     self.df=pd.DataFrame()  # Clear buffer
                     
                 elif j[0] == 'start': 
-                    print 'Starting To MoveArm.' 
                     self.StartingToMoveArm()
                     
                     
@@ -94,59 +89,21 @@ class Servers(StreamRequestHandler):
             for j in range(NumCols):
                 
                 print self.dfMove.ix[i,j]
-                #self.SerialSendToArduino.MoveSteps(self.dfMove.ix[i,j])
-                
-                print self.dfMove.ix[i,j]
+                self.SerialSendToArduino.MoveSteps(self.dfMove.ix[i,j])
                 #time.sleep(1)
                 
                 print 'Move number: '+ str(k)   
                 k=k+1 
                 time.sleep(0.01)
                                 
-            #while self.SerialSendToArduino.DetecAllENA()==0:
+            while self.SerialSendToArduino.DetecAllENA()==0:
                 time.sleep(0.01)
-                
-class socketCommuWithMatlab(threading.Thread):
-    def __init__(self):       
-        threading.Thread.__init__(self);
-        self.server = SocketServer.ThreadingTCPServer(addr,Servers)
-        pass
-    
-        #client
-        self.s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)      
-        print "connecting"
-        self.s.connect(('169.254.177.40',3004))      
-        print "connected"
-    
-    def sendingTo(self):
-        while 1:
-            cmd=raw_input("Please input cmd:")    
-            self.s.sendall(cmd)     
-            data=self.s.recv(1024)     
-        print data         
-        s.close()     
-    def run(self):
-       
-        print 'server is running....'                
-        self.server.serve_forever()   
-        print 'server is finished....' 
- 
-    def asas(self):
-        #global GloReceived  
-        print "transferd data: "
-        print GloReceived                
-if __name__=='__main__':
-                
-    
-    sockMatlab=socketCommuWithMatlab()
-    #sockMatlab.setDaemon(True)
-    #sockMatlab.start()
-    sockMatlab.sendingTo()
-    '''
-    for i in range(10):
-        sockMatlab.asas()
-        time.sleep(1)
-    '''
-    time.sleep(10)
-    print "Quit" 
-    
+        
+
+                                                          
+            
+              
+print 'server is running....'    
+server = SocketServer.ThreadingTCPServer(addr,Servers)    
+server.serve_forever()   
+print "Quit" 
