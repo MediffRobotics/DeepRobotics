@@ -6,13 +6,13 @@
 # -------------------------------
 
 import gym
-import tensorflow as tf 
-import numpy as np 
+import tensorflow as tf
+import numpy as np
 import random
 from collections import deque
 
 # Hyper Parameters for DQN
-GAMMA = 0.9 # discount factor for target Q 
+GAMMA = 0.9 # discount factor for target Q
 INITIAL_EPSILON = 0.5 # starting value of epsilon
 FINAL_EPSILON = 0.01 # final value of epsilon
 REPLAY_SIZE = 10000 # experience replay buffer size
@@ -27,7 +27,7 @@ class DQN():
 		self.time_step = 0
 		self.epsilon = INITIAL_EPSILON
 		self.state_dim = env.observation_space.shape[0]
-		self.action_dim = env.action_space.n 
+		self.action_dim = env.action_space.n
 
 		self.create_Q_network()
 		self.create_training_method()
@@ -154,7 +154,7 @@ def main():
 	for episode in xrange(EPISODE):
 		# initialize task
 		state = env.reset()
-		# Train 
+		# Train
 		for step in xrange(STEP):
 			action = agent.egreedy_action(state) # e-greedy action for train
 			next_state,reward,done,_ = env.step(action)
@@ -183,8 +183,9 @@ def main():
 				break
 
 	# save results for uploading
-	env.monitor.start('gym_results/CartPole-v0-experiment-1',force = True)
+	# env.monitor.start('gym_results/CartPole-v0-experiment-1',force = True)
 	#env.monitor.start('./',force = True)
+	'''
 	for i in xrange(100):
 		state = env.reset()
 		for j in xrange(200):
@@ -194,7 +195,7 @@ def main():
 			total_reward += reward
 			if done:
 				break
-	env.monitor.close()
-
+	# env.monitor.close()
+	'''
 if __name__ == '__main__':
 	main()

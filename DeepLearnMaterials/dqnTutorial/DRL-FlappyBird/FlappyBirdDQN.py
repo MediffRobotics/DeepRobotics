@@ -6,7 +6,7 @@
 
 import cv2
 import sys
-sys.path.append("game/")
+sys.path.append('game/')
 import wrapped_flappy_bird as game
 from BrainDQN_Nature import BrainDQN
 import numpy as np
@@ -32,11 +32,15 @@ def playFlappyBird():
 	brain.setInitState(observation0)
 
 	# Step 3.2: run the game
-	while 1!= 0:
+	while 1!=0:
 		action = brain.getAction()
 		nextObservation,reward,terminal = flappyBird.frame_step(action)
 		nextObservation = preprocess(nextObservation)
 		brain.setPerception(nextObservation,action,reward,terminal)
+		cv2.imshow('Video', 0)
+		if cv2.waitKey(1) & 0xFF == 27:
+			break
+
 
 def main():
 	playFlappyBird()

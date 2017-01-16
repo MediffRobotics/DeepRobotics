@@ -4,10 +4,10 @@
 # Date: 2016.3.21
 # -----------------------------
 
-import tensorflow as tf 
-import numpy as np 
+import tensorflow as tf
+import numpy as np
 import random
-from collections import deque 
+from collections import deque
 
 # Hyper Parameters:
 FRAME_PER_ACTION = 1
@@ -93,7 +93,7 @@ class BrainDQN:
 
 	def createTrainingMethod(self):
 		self.actionInput = tf.placeholder("float",[None,self.actions])
-		self.yInput = tf.placeholder("float", [None]) 
+		self.yInput = tf.placeholder("float", [None])
 		Q_Action = tf.reduce_sum(tf.mul(self.QValue, self.actionInput), reduction_indices = 1)
 		self.cost = tf.reduce_mean(tf.square(self.yInput - Q_Action))
 		self.trainStep = tf.train.AdamOptimizer(1e-6).minimize(self.cost)
@@ -101,7 +101,7 @@ class BrainDQN:
 
 	def trainQNetwork(self):
 
-		
+
 		# Step 1: obtain random minibatch from replay memory
 		minibatch = random.sample(self.replayMemory,BATCH_SIZE)
 		state_batch = [data[0] for data in minibatch]
@@ -109,7 +109,7 @@ class BrainDQN:
 		reward_batch = [data[2] for data in minibatch]
 		nextState_batch = [data[3] for data in minibatch]
 
-		# Step 2: calculate y 
+		# Step 2: calculate y
 		y_batch = []
 		QValue_batch = self.QValueT.eval(feed_dict={self.stateInputT:nextState_batch})
 		for i in range(0,BATCH_SIZE):
@@ -132,7 +132,7 @@ class BrainDQN:
 		if self.timeStep % UPDATE_TIME == 0:
 			self.copyTargetQNetwork()
 
-		
+
 	def setPerception(self,nextObservation,action,reward,terminal):
 		#newState = np.append(nextObservation,self.currentState[:,:,1:],axis = 2)
 		newState = np.append(self.currentState[:,:,1:],nextObservation,axis = 2)
@@ -194,4 +194,3 @@ class BrainDQN:
 
 	def max_pool_2x2(self,x):
 		return tf.nn.max_pool(x, ksize = [1, 2, 2, 1], strides = [1, 2, 2, 1], padding = "SAME")
-		
