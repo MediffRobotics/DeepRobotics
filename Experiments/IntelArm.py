@@ -20,16 +20,18 @@ def moveArm():
     action60 = np.array([0,0,0])
     observation0, reward = arm_state.angle_state(action10,action20,action30,
                                             action40,action50,action60)
-    observation0 = preprocess(observation0)
+    observation0 = cv2.cvtColor(cv2.resize(observation0, (80,80)), cv2.COLOR_BGR2GRAY)
+    ret, observation0 = cv2.threshold(observation0, 1, 255, cv2.THRESH_BINARY)
     brain.setInitState(observation0)
 
     while 1 != 0:
         action = brain.getAction()
-        nextObservation,reward,terminal = arm_state.angle_state(action10
+        nextObservation,reward = arm_state.angle_state(action10
                             ,action20,action30,action40,action50,action60)
+        print reward
         #nextObservation = preprocess(nextObservation)
         #brain.setPerception(nextObservation,action,reward,terminal)
-        cv2.imshow('control', 0)
+        #cv2.imshow('control', 0)
         if cv2.waitKey(1) & 0xFF == 27:
             break
 

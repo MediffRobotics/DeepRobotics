@@ -29,6 +29,7 @@ def playFlappyBird():
 	observation0, reward0, terminal = flappyBird.frame_step(action0)
 	observation0 = cv2.cvtColor(cv2.resize(observation0, (80, 80)), cv2.COLOR_BGR2GRAY)
 	ret, observation0 = cv2.threshold(observation0,1,255,cv2.THRESH_BINARY)
+	print observation0.shape
 	brain.setInitState(observation0)
 
 	# Step 3.2: run the game

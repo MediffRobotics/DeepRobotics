@@ -69,8 +69,8 @@ class BrainDQN:
 		b_fc2 = self.bias_variable([self.actions])
 
 		# input layer
-
-		stateInput = tf.placeholder("float")
+		
+		stateInput = tf.placeholder("float", [None,80,80,4])
 		#stateInput = [stateInput[0], stateInput[1], stateInput[2], stateInput[4]]
 
 		# hidden layers
