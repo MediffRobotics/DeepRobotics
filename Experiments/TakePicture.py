@@ -29,11 +29,15 @@ class CCamera(threading.Thread):
     def run(self):
         while True:
             self.get_image()
+            '''
             self.showImg()
+            if cv2.waitKey(1) & 0xFF == 27:
+                break
+                '''
     def showImg(self):
         #print "show img"
         cv2.imshow("left", self.frame)
-        cv2.waitKey(1)
+        #cv2.waitKey(1)
         #if cv2.waitKey(1) & 0xFF == ord('q'):
 		#    return
         #time.sleep(1)

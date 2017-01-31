@@ -14,45 +14,31 @@ class ArmState:
         self.camera.setDaemon(True)
         self.camera.start()
         time.sleep(1)
-    def angle_state(self, input_action1, input_action2, input_action3,
-                        input_action4, input_action5, input_action6):
-
+    def angle_state(self, input_action1):
         reward = 0
 
-        if sum(input_action1) == 0:
-            pass
-        elif sum(input_action2) == 0:
-            pass
-        elif sum(input_action3) == 0:
-            pass
-        elif sum(input_action4) == 0:
-            pass
-        elif sum(input_action5) == 0:
-            pass
-        elif sum(input_action6) == 0:
+        if sum(input_action1) != 1:
+            raise ValueError('Invalid input actions!')
+            '''
+            if sum(input_action1) != 1:
+                raise ValueError('Invalid input actions!')
+            if sum(input_action1) != 1:
+                raise ValueError('Invalid input actions!')
+            if sum(input_action1) != 1:
+                raise ValueError('Invalid input actions!')
+            if sum(input_action1) != 1:
+                raise ValueError('Invalid input actions!')
+            if sum(input_action1) != 1:
+                raise ValueError('Invalid input actions!')
+            '''
+            #Angle of engine 1
+        if input_action1[0] == 1:
+            self.angle1 -= 1
+        elif input_action1[1] == 1:
             pass
         else:
-            if sum(input_action1) != 1:
-                raise ValueError('Invalid input actions!')
-            if sum(input_action1) != 1:
-                raise ValueError('Invalid input actions!')
-            if sum(input_action1) != 1:
-                raise ValueError('Invalid input actions!')
-            if sum(input_action1) != 1:
-                raise ValueError('Invalid input actions!')
-            if sum(input_action1) != 1:
-                raise ValueError('Invalid input actions!')
-            if sum(input_action1) != 1:
-                raise ValueError('Invalid input actions!')
-
-            #Angle of engine 1
-            if input_action1[0] == 1:
-                self.angle1 -= 1
-            elif input_action1[1] == 1:
-                pass
-            else:
-                self.angle1 += 1
-
+            self.angle1 += 1
+            '''
             #Angle of engine 2
             if input_action2[0] == 1:
                 self.angle2 -= 1
@@ -92,7 +78,7 @@ class ArmState:
                 pass
             else:
                 self.angle6 += 1
-
+            '''
 
         observation = self.camera.frame
 

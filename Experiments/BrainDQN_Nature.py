@@ -69,7 +69,7 @@ class BrainDQN:
 		b_fc2 = self.bias_variable([self.actions])
 
 		# input layer
-		
+
 		stateInput = tf.placeholder("float", [None,80,80,4])
 		#stateInput = [stateInput[0], stateInput[1], stateInput[2], stateInput[4]]
 
@@ -170,7 +170,7 @@ class BrainDQN:
 				action_index = np.argmax(QValue)
 				action[action_index] = 1
 		else:
-			action[0] = 1 # do nothing
+			action[1] = 1 # do nothing
 
 		# change episilon
 		if self.epsilon > FINAL_EPSILON and self.timeStep > OBSERVE:
