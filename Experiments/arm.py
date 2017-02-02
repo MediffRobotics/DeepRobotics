@@ -1,5 +1,6 @@
 import cv2
 from TakePicture import CCamera
+from tcpClient import Client
 import time
 
 class ArmState:
@@ -33,11 +34,11 @@ class ArmState:
             '''
             #Angle of engine 1
         if input_action1[0] == 1:
-            self.angle1 -= 1
+            self.angle1 = -1
         elif input_action1[1] == 1:
-            pass
+            self.angle1 = 0
         else:
-            self.angle1 += 1
+            self.angle1 = 1
             '''
             #Angle of engine 2
             if input_action2[0] == 1:
@@ -79,7 +80,8 @@ class ArmState:
             else:
                 self.angle6 += 1
             '''
-
+        print self.angle1
+        reward = Client(self.angle1)
         observation = self.camera.frame
 
         return observation, reward

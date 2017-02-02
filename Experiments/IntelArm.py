@@ -27,7 +27,8 @@ def moveArm():
 
     while 1 != 0:
         action = brain.getAction()
-        nextObservation,reward = arm_state.angle_state(action10)
+        print action
+        nextObservation,reward = arm_state.angle_state(action)
         print reward
         #nextObservation = preprocess(nextObservation)
         #brain.setPerception(nextObservation,action,reward,terminal)

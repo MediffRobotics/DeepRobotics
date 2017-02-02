@@ -35,6 +35,7 @@ def playFlappyBird():
 	# Step 3.2: run the game
 	while 1!=0:
 		action = brain.getAction()
+		print action
 		nextObservation,reward,terminal = flappyBird.frame_step(action)
 		nextObservation = preprocess(nextObservation)
 		brain.setPerception(nextObservation,action,reward,terminal)

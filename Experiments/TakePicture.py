@@ -9,7 +9,7 @@ class CCamera(threading.Thread):
 
 
         # Camera 0 is the integrated web cam on my netbook
-        self.camera_port = 1
+        self.camera_port = 0
         #Number of frames to throw away while the camera adjusts to light levels
         self.ramp_frames = 30
         # Now we can initialize the camera capture object with the cv2.VideoCapture class.
