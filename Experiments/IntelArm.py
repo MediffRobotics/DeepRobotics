@@ -30,7 +30,7 @@ def moveArm():
         print action
         nextObservation,reward = arm_state.angle_state(action)
         print reward
-        #nextObservation = preprocess(nextObservation)
+        nextObservation = preprocess(nextObservation)
         brain.setPerception(nextObservation,action,reward)
         cv2.imshow('Observation', nextObservation)
         if cv2.waitKey(1) & 0xFF == 27:
