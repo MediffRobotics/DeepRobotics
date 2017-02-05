@@ -33,7 +33,7 @@ class BrainCommuViaSock:
         self.Elbow_OldShiftingSteps=ShiftingSteps;
 
         UpdateShiftingSteps=int(UpdateShiftingSteps)
-        print ('Elbow_UpdateShiftingSteps: %d',UpdateShiftingSteps)
+        #print ('Elbow_UpdateShiftingSteps: %d',UpdateShiftingSteps)
 
 
         return UpdateShiftingSteps
@@ -64,7 +64,7 @@ class BrainCommuViaSock:
         self.Uparm_OldShiftingSteps=ShiftingSteps;
 
         UpdateShiftingSteps=int(UpdateShiftingSteps)
-        print('Up_arm UpdateShiftingSteps: %d' % UpdateShiftingSteps)          
+        #print('Up_arm UpdateShiftingSteps: %d' % UpdateShiftingSteps)          
         return UpdateShiftingSteps
 
 

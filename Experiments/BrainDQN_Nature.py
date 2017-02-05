@@ -15,7 +15,8 @@ GAMMA = 0.99 # decay rate of past observations
 OBSERVE = 100. # timesteps to observe before training
 EXPLORE = 200000. # frames over which to anneal epsilon
 FINAL_EPSILON = 0.001 # final value of epsilon
-INITIAL_EPSILON = 0.01 # starting value of epsilon
+#INITIAL_EPSILON = 0.01 # starting value of epsilon
+INITIAL_EPSILON = 0.5 # starting value of epsilon
 REPLAY_MEMORY = 50000 # number of previous transitions to remember
 BATCH_SIZE = 32 # size of minibatch
 UPDATE_TIME = 100
@@ -117,6 +118,12 @@ class BrainDQN:
 			if terminal:
 				y_batch.append(reward_batch[i])
 			else:
+
+				#print "error point1"
+
+				#print reward_batch[i]
+				#print "error point2"
+				#print QValue_batch[i]
 				y_batch.append(reward_batch[i] + GAMMA * np.max(QValue_batch[i]))
 
 		self.trainStep.run(feed_dict={

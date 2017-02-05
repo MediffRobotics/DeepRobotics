@@ -1,6 +1,6 @@
 import cv2
 from TakePicture import CCamera
-from tcpClient import Client
+from tcpClient import  clientSocketControllArm
 import time
 
 class ArmState:
@@ -15,23 +15,15 @@ class ArmState:
         self.camera.setDaemon(True)
         self.camera.start()
         time.sleep(1)
+        self.sockClient=clientSocketControllArm()
+
     def angle_state(self, input_action1):
         reward = 0
+        terminal = False
 
         if sum(input_action1) != 1:
             raise ValueError('Invalid input actions!')
-            '''
-            if sum(input_action1) != 1:
-                raise ValueError('Invalid input actions!')
-            if sum(input_action1) != 1:
-                raise ValueError('Invalid input actions!')
-            if sum(input_action1) != 1:
-                raise ValueError('Invalid input actions!')
-            if sum(input_action1) != 1:
-                raise ValueError('Invalid input actions!')
-            if sum(input_action1) != 1:
-                raise ValueError('Invalid input actions!')
-            '''
+
             #Angle of engine 1
         if input_action1[0] == 1:
             self.angle1 = -1
@@ -39,49 +31,11 @@ class ArmState:
             self.angle1 = 0
         else:
             self.angle1 = 1
-            '''
-            #Angle of engine 2
-            if input_action2[0] == 1:
-                self.angle2 -= 1
-            elif input_action2[1] == 1:
-                pass
-            else:
-                self.angle2 += 1
 
-            #Angle of engine 3
-            if input_action3[0] == 1:
-                self.angle3 -= 1
-            elif input_action3[1] == 1:
-                pass
-            else:
-                self.angle3 += 1
 
-            #Angle of engine 4
-            if input_action4[0] == 1:
-                self.angle4 -= 1
-            elif input_action4[1] == 1:
-                pass
-            else:
-                self.angle4 += 1
+        #print self.angle1
+        reward=self.sockClient.ClientSendAngle(self.angle1)
 
-            #Angle of engine 5
-            if input_action5[0] == 1:
-                self.angle5 -= 1
-            elif input_action5[1] == 1:
-                pass
-            else:
-                self.angle5 += 1
-
-            #Angle of engine 6
-            if input_action6[0] == 1:
-                self.angle6 -= 1
-            elif input_action6[1] == 1:
-                pass
-            else:
-                self.angle6 += 1
-            '''
-        print self.angle1
-        reward = Client(self.angle1)
+        time.sleep(0.5)
         observation = self.camera.frame
-
-        return observation, reward
+        return observation, reward, terminal
